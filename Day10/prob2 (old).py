@@ -1,6 +1,7 @@
 # f = open("input", "r")
 f = open("test", "r")
 # f = open("test2", "r")
+# f = open("test3", "r")
 
 inp = []
 curPaths = []
@@ -28,22 +29,41 @@ for i in range(len(inp) - 1):
         else:
             break
     if len(options) > 1:
+        current = inp[i]
         if not curPaths:
             curPaths = options
         else:
             prevPaths = curPaths
             curPaths = options
         count = 0
+        print("paths:", paths, "prev", prevPaths, "cur", curPaths, "len", len(curPaths))
         if not prevPaths:
-            paths = paths * len(options)
+            paths *= len(curPaths)
         else:
-            for k in prevPaths:
-                if inp[i] >= k:
-                    count += 1
-            paths *= count
-            print("count:", count, "prev", prevPaths, "len", len(options))
+            if current in prevPaths:
+                # for k in prevPaths:
+                #     if current >= k:
+                #         count += 1
+                # print(count, '*', len(options), '- 1', '=', count * len(options) - 1)
+                # paths += len(curPaths) * count - 1
+                for k in prevPaths:
+                    for m in curPaths:
+                        if m > k and m < (k + 4):
+                            # option from curPath is within range 1-3 of option from prevPath
+                            count += 1
+                paths += count
+                # toAdd = 0
+                # print(prevPaths, curPaths)
+                # for l in prevPaths:
+                #     if l in curPaths:
+                #         toAdd += 1
+                # paths += toAdd - 1
+            else:
+                paths *= len(curPaths)
+
+            print("prev", prevPaths, "cur", curPaths, "current", current, "len", len(curPaths))
             # paths += ((len(options) * count) - 1)
-            print(options, ", for", inp[i], ", num paths:", paths)
+            print(curPaths, ", for", current, ", num paths:", paths)
         print()
 
 print("num paths:", paths)
