@@ -1,7 +1,7 @@
 # f = open("input", "r")
-f = open("test", "r")
+# f = open("test", "r")
 # f = open("test2", "r")
-# f = open("test3", "r")
+f = open("test3", "r")
 
 inp = []
 curPaths = []
@@ -46,12 +46,17 @@ for i in range(len(inp) - 1):
                 #         count += 1
                 # print(count, '*', len(options), '- 1', '=', count * len(options) - 1)
                 # paths += len(curPaths) * count - 1
-                for k in prevPaths:
-                    for m in curPaths:
-                        if m > k and m < (k + 4):
-                            # option from curPath is within range 1-3 of option from prevPath
-                            count += 1
-                paths += count
+
+                paths += len(curPaths) - 1
+
+                # for k in prevPaths:
+                #     for m in curPaths:
+                #         if m > k and m < (k + 4):
+                #             # option from curPath is within range 1-3 of option from prevPath
+                #             count += 1
+                # paths += count
+                
+                
                 # toAdd = 0
                 # print(prevPaths, curPaths)
                 # for l in prevPaths:
